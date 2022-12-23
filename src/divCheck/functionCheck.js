@@ -8,11 +8,12 @@ const functionSymbol = "function-name"
 
 const getDivAttrInfo = (div, symbol) => {
     const name = div.getAttribute(symbol);
+    console.log("name", div.getAttribute(`${symbol}-args`));
     var args = JSON.parse(div.getAttribute(`${symbol}-args`));
     var price = div.getAttribute(`${symbol}-value-in-eth`);
     console.log("args name ", name, args, typeof args);
-    if (!(args && args.length)) {
-        args = [];
+    if (!(args && Object.keys(args).length)) {
+        args = {};
     }
     if (price) {
         return {
@@ -66,8 +67,8 @@ const getInputInfoFromDiv = (info) => {
     const functionArgDivs = [
         ...document.querySelectorAll(`[${querySymbol}]`)
     ]
+    var inputArgs = info.args;
     if (functionArgDivs && functionArgDivs.length) {
-        var inputArgs = {};
         functionArgDivs.forEach((functionArgDiv) => {
             const [name, value] = getFunctionArgsFromAttr(functionArgDiv, querySymbol);
             if (name && value) {
@@ -85,10 +86,10 @@ const getInputInfoFromDiv = (info) => {
                 }
             }
         })
-        info = {
-            ...info,
-            inputArgs
-        }
+    }
+    info = {
+        ...info,
+        inputArgs
     }
     return info;
 }

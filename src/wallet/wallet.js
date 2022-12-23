@@ -40,7 +40,17 @@ export const connectWalletInit = async (signer) => {
       console.log("Read function for CDN", store.getState().userModal.readFunction);
       store.getState().userModal.readFunction.forEach(async (func) => {
         try {
-          const res = await callViewFunction(window.CONTRACT_ADDRESS, func.name, func.args);
+          const args = func.inputs.map((input) => {
+            const nameOfInput = input.name;
+            if (nameOfInput in func.args) {
+              return func.args[nameOfInput];
+            }
+            else {
+              throw new Error(`Input ${nameOfInput} not found in args`);
+            }
+          });
+          console.log("view call function args", args);
+          const res = await callViewFunction(window.CONTRACT_ADDRESS, func.name, args);
           updateDivText(func.name, res);
         } catch (e) {
           console.log("Error in reading function", e.message);
