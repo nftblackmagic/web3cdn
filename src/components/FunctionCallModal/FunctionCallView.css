@@ -1,0 +1,122 @@
+.function-call-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding: 0 20px;
+}
+
+.function-call-wrapper button {
+    position: relative;
+    height: 40px;
+    font-size: 18px;
+    font-weight: 700;
+    padding: 10px 16px;
+    border-radius: 10px;
+    transition-duration: 0.3s;
+    background-color: #333;
+    color: white;
+    border: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: auto;
+}
+
+.function-call-wrapper button:hover {
+    cursor: pointer;
+    background-color: gainsboro;
+    color: #333;
+}
+
+.function-call-wrapper button:disabled,
+.function-call-wrapper button[disabled] {
+    cursor: none;
+    background-color: gainsboro;
+    color: grey;
+}
+
+.function-call-wrapper button:active {
+    background-color: grey;
+}
+
+.function-call-input {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 10px;
+    width: 100%;
+}
+
+.function-input-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+    gap: 5px;
+    width: 100%;
+}
+
+.function-input-wrapper input {
+    width: 100%;
+    height: 30px;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 14px;
+    font-weight: 400;
+    outline: none;
+}
+
+.function-input-wrapper input:focus {
+    border: 1px solid grey;
+}
+
+.function-input-wrapper input::placeholder {
+    color: #e0e0e0;
+}
+
+.function-input-wrapper input:disabled {
+    background-color: gainsboro;
+}
+
+.function-input-wrapper label {
+    font-size: 18px;
+    font-weight: 400;
+    color: grey;
+    text-transform: capitalize;
+}
+
+.etherscan-wrapper {
+    padding-top: 10px;
+    color: grey;
+}
+
+.etherscan-wrapper a {
+    color: grey;
+}
+
+.common-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 0;
+    width: 100%;
+}
+
+.common-title h1 {
+    font-style: italic;
+    font-weight: 700;
+    font-size: 24px;
+    padding: 0;
+    margin: 0 24px;
+}
+
+.common-title button {
+    padding: 0;
+    margin: 0 24px;
+}

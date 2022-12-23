@@ -1,0 +1,25 @@
+.powerBy {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    padding: 8px;
+}
+
+.powerBy h1 {
+    color: gray;
+    margin: 0;
+    font-size: 14px;
+    padding: 0;
+    line-height: 120%;
+}
+
+.powerBy img {
+    height: 14px;
+    width: auto;
+    margin: 0;
+    padding: 0;
+}

@@ -1,0 +1,180 @@
+.cardWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding: 0 10px;
+}
+
+.cardWrapper h1 {
+    font-size: 18px;
+    font-weight: 700;
+    padding: 10px 16px;
+    text-align: center;
+    margin: 0;
+}
+
+.cardWrapper h2 {
+    font-size: 18px;
+    font-weight: 700;
+    padding: 5px;
+    text-align: center;
+    margin: 0;
+}
+
+.ship {
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.ship h1 {
+    padding: 8px 0 0 0;
+}
+
+.ship h3 {
+    font-size: 14px;
+    font-weight: 400;
+    color: gray;
+    padding: 0;
+}
+
+.error-text {
+    width: 100%;
+    color: brown;
+}
+
+.select-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0 0 20px 0px;
+}
+
+.price-tag {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items: flex-end;
+}
+
+.small {
+    font-size: 14px;
+    padding: 8px;
+}
+
+.bold {
+    font-size: 18px;
+    font-weight: bold;
+    padding-right: 10px;
+}
+
+.common-button {
+    position: relative;
+    height: 40px;
+    font-size: 18px;
+    font-weight: 700;
+    padding: 10px 16px;
+    border-radius: 10px;
+    transition-duration: 0.3s;
+    background-color: #333;
+    color: white;
+    border: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: auto;
+}
+
+.common-button:hover {
+    cursor: pointer;
+    background-color: gainsboro;
+    color: #333;
+}
+
+.common-button:disabled,
+.common-button[disabled] {
+    cursor: none;
+    background-color: gainsboro;
+    color: grey;
+}
+
+.common-button:active {
+    background-color: grey;
+}
+
+.product-tag {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 6px;
+}
+
+.product-tag h1 {
+    margin: 0;
+    padding: 0;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 120%;
+}
+
+.product-tag h2 {
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 120%;
+}
+
+.link-button {
+    text-decoration: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    color: gray;
+}
+
+.link-button:hover {
+    text-decoration: underline;
+}
+
+.confirm-button {
+    align-self: center;
+    margin: 20px 0 10px 0;
+}
+
+.cancel-button {
+    color: black;
+    background-color: white;
+    border: 1px solid #333;
+}
+
+.login-button {
+    color: #333;
+    background-color: white;
+    border: none;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+}
+
+.chain-button {
+    color: #333;
+    background-color: white;
+    border: none;
+    font-size: 14px;
+    font-weight: 400;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    height: auto;
+}
+
+.addship-button {
+    height: auto;
+    font-size: 14px;
+}
