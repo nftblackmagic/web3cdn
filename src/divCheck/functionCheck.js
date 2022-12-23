@@ -8,8 +8,15 @@ const functionSymbol = "function-name"
 
 const getDivAttrInfo = (div, symbol) => {
     const name = div.getAttribute(symbol);
-    console.log("name", div.getAttribute(`${symbol}-args`));
-    var args = JSON.parse(div.getAttribute(`${symbol}-args`));
+    var args = {};
+    try {
+        args = JSON.parse(div.getAttribute(`${symbol}-args`));
+    } catch (e) {
+        console.log("Error in parsing args", e.message);
+        if (typeof div.getAttribute(`${symbol}-args`) === "object") {
+            args = div.getAttribute(`${symbol}-args`);
+        }
+    }
     var price = div.getAttribute(`${symbol}-value-in-eth`);
     console.log("args name ", name, args, typeof args);
     if (!(args && Object.keys(args).length)) {
