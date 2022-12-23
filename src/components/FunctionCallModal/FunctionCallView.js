@@ -27,9 +27,84 @@ export const FunctionCallModal = () => {
     const chain = useSelector(state => state.userModal.chainId);
     const [args, setArgs] = React.useState({});
     const [argsValues, setArgsValues] = React.useState([]);
-    const { enqueueSnackbar } = useSnackbar();
     const [price, setPrice] = React.useState();
+    const { enqueueSnackbar } = useSnackbar();
+
     const isPayable = functionCallInfo.type === "payable";
+    const cardClasses = isMobile() ? { minWidth: 275 } : { minWidth: 475 };
+
+    const {
+        config,
+        error: prepareError,
+        isError: isPrepareError,
+    } = usePrepareContractWrite({
+        address: functionCallInfo.contractAddress,
+        abi: [
+            functionCallInfo.event,
+        ],
+        functionName: functionCallInfo.name,
+        args: argsValues,
+        chainId: chain?.id,
+        overrides: {
+            value: Number(price) ? ethers.utils.parseEther(price) : "0",
+        },
+        enabled: ((argsValues.length > 0) && (chain)),
+    });
+    const { data, error, isError, write } = useContractWrite(config);
+
+    const { isLoading, isSuccess } = useWaitForTransaction({
+        hash: data?.hash,
+    })
+
+    const handleSetArgs = (name, value) => {
+        setArgs({ ...args, [name]: value })
+    }
+
+    const handleClose = () => {
+        dispatch(closeFunctionCallModal());
+        setArgs({});
+        setArgsValues([]);
+        setPrice();
+    };
+
+    const reportError = (e) => {
+        const msg = e.message;
+        const regex = /reason="(.*?)",/;
+        const found = msg.match(regex);
+        if (found) {
+            enqueueSnackbar(found[1], {
+                variant: "error",
+            });
+        }
+        else {
+            enqueueSnackbar(msg.split("(")[0], {
+                variant: "error",
+            });
+        }
+    }
+
+    const handleSubmit = () => {
+        console.log("submit", config, args, argsValues);
+        if (isPrepareError) {
+            reportError(prepareError);
+            return
+        }
+        write?.();
+    }
+
+    const handleInputDisabled = (input) => {
+        if (functionCallInfo.inputArgs) {
+            if (input.name in functionCallInfo.inputArgs) {
+                return true
+            }
+            else {
+                return false
+            }
+        }
+        else {
+            return false
+        }
+    }
 
     useEffect(() => {
         var argsValuesTmp = [];
@@ -59,86 +134,24 @@ export const FunctionCallModal = () => {
         }
     }, [functionCallInfo.price])
 
-    const handleClose = () => {
-        dispatch(closeFunctionCallModal());
-    };
-
-    const {
-        config,
-        error: prepareError,
-        isError: isPrepareError,
-    } = usePrepareContractWrite({
-        address: functionCallInfo.contractAddress,
-        abi: [
-            functionCallInfo.event,
-        ],
-        functionName: functionCallInfo.name,
-        args: argsValues,
-        chainId: chain?.id,
-        overrides: {
-            value: Number(price) ? ethers.utils.parseEther(price) : "0",
-        },
-        enabled: ((argsValues.length > 0) && (chain)),
-    });
-    const { data, error, isError, write } = useContractWrite(config);
-
-    const { isLoading, isSuccess } = useWaitForTransaction({
-        hash: data?.hash,
-    })
-
-    const handleSetArgs = (name, value) => {
-        setArgs({ ...args, [name]: value })
-    }
-
-    const reportError = (e) => {
-        const msg = e.message;
-        const regex = /reason="(.*?)",/;
-        const found = msg.match(regex);
-        if (found) {
-            enqueueSnackbar(found[1], {
-                variant: "error",
-            });
-        }
-        else {
-            enqueueSnackbar(msg.split("(")[0], {
-                variant: "error",
-            });
-        }
-    }
-
-    const handleSubmit = () => {
-        console.log("submit", config, args, argsValues);
-        if (isPrepareError) {
-            reportError(prepareError);
-            return
-        }
-        write?.();
-    }
-
     useEffect(() => {
         if (isError) {
             reportError(error);
         }
     }, [error, isError, enqueueSnackbar])
 
-    const handleInputDisabled = (input) => {
-        if (functionCallInfo.inputArgs) {
-            if (input.name in functionCallInfo.inputArgs) {
-                if (!(input.name in args)) {
-                    setArgs({ ...args, [input.name]: functionCallInfo.inputArgs[input.name] })
+    useEffect(() => {
+        if (functionCallInfo.inputs && functionCallInfo.inputArgs) {
+            var argsTmp = {};
+            for (var input of functionCallInfo.inputs) {
+                if (input.name in functionCallInfo.inputArgs) {
+                    argsTmp[input.name] = functionCallInfo.inputArgs[input.name];
                 }
-                return true
             }
-            else {
-                return false
-            }
+            setArgs(argsTmp);
         }
-        else {
-            return false
-        }
-    }
+    }, [functionCallInfo.inputs, functionCallInfo.inputArgs])
 
-    const cardClasses = isMobile() ? { minWidth: 275 } : { minWidth: 475 };
     return (
         <>
             <Dialog
