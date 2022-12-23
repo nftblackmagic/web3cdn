@@ -144,7 +144,7 @@ ABI=<Put the contract abi here. It might be from etherscan>
 
 For example, the website wants to interact with smart contract 0x13BD972B0bfaefC9538a43c1FDA11D71C720cD47 in mainnet. It's not a proxy contract. And it's on etherum goerli testnet.
 
-PS: In this example, we get ABI from an API call. But not all abi can be found from API call. Add ABI=[... put your own abi here to make sure script can work]
+PS: In this example, we get ABI from an API call. But not all abi can be found from API call. Add ABI=[... put your own abi here] to make sure script work
 ```
 <script> CONTRACT_ADDRESS="0xCA127e07Ce57c78eF0C739F268A437e76c66e0F1"
 LOGIC_ADDRESS="0xCA127e07Ce57c78eF0C739F268A437e76c66e0F1"
