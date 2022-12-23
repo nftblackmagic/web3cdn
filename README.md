@@ -84,13 +84,13 @@
 
 "What is the easiest way to add web3 capabilities, such as connecting a wallet and interacting with contracts, to my website?"
 
-Catchon CDN is a web3 tool that enables low-code development for frontend engineers, smart contract engineers, and designers. It simplifies the process of interacting with blockchain technologies, allowing users to easily connect with the blockchain without needing to understand the detailed implementation of wallet and contract interactions. With a quick setup, Catchon CDN enables users to easily communicate with the blockchain.
-
 Catchon CDN is a useful tool for:
 
 * Smart contract developers who don't want to build a website from scratch
 * UI-based web development tool users, such as those using Webflow, WIX, or WordPress, who want to add web3 functionality to their websites
 * Those who want to easily call a smart contract function from their website without having to deal with complicated web3 settings.
+
+Catchon CDN is a web3 tool that enables low-code development for frontend engineers, smart contract engineers, and designers. It simplifies the process of interacting with blockchain technologies, allowing users to easily connect with the blockchain without needing to understand the detailed implementation of wallet and contract interactions. With a quick setup, Catchon CDN enables users to easily communicate with the blockchain.
 
 
 <!-- Use the `BLANK_README.md` to get started. -->
@@ -309,4 +309,8 @@ Use this space to list resources you find helpful and would like to give credit 
 [Bootstrap-url]: https://getbootstrap.com
 [JQuery.com]: https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white
 [JQuery-url]: https://jquery.com 
+<<<<<<< HEAD
 [Webflow-url]: https://webflow.com/made-in-webflow/website/web3-integration-website
+=======
+[Webflow-url]: https://web3-integration-website.webflow.io/
+>>>>>>> 3de6164b9246df578aa9bc2e6bf8716e8309967f
