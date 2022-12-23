@@ -30,7 +30,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/xiaozaa/web3cdn">
+  <a href="https://github.com/nftblackmagic/web3cdn">
     <img src="images/logo.png" alt="Logo" width="auto" height="80">
   </a>
 
@@ -39,14 +39,14 @@
   <p align="center">
     An awesome no code solution for web3 development!
     <br />
-    <a href="https://github.com/xiaozaa/web3cdn"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/nftblackmagic/web3cdn"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/xiaozaa/web3cdn">View Demo</a>
+    <a href="https://github.com/nftblackmagic/web3cdn">View Demo</a>
     ·
-    <a href="https://github.com/xiaozaa/web3cdn/issues">Report Bug</a>
+    <a href="https://github.com/nftblackmagic/web3cdn/issues">Report Bug</a>
     ·
-    <a href="https://github.com/xiaozaa/web3cdn/issues">Request Feature</a>
+    <a href="https://github.com/nftblackmagic/web3cdn/issues">Request Feature</a>
   </p>
 </div>
 
@@ -102,7 +102,7 @@ Catchon CDN is a useful tool for:
 ### Live example
 
 * [![React][React.js]][React-url]
-* [Webflow]
+* [![Webflow][Webflow.js]][Webflow-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -180,24 +180,25 @@ For example, read contract name:
     Name
   </a>
 ```
-If the read-only function needs inputs, add attribution **function-name="<The view function name\>" function-name-args=<The array of args\>**
-For example, read token supply of token id 0:
+If the read-only function needs inputs, add attribution **function-name="<The view function name\>" function-name-args-<The arg name\>=<The value of args\>**
+For example, read token balance of address 0x5a3B85334612a18cCE4Eef4567c1DF543433AdC4:
 ```
-  <a function-name="supplyLimit" function-name-args=[0]>
-    supplimit
-  </a>
+  <h3 function-name="balanceOf" function-name-args-owner="0x5a3B85334612a18cCE4Eef4567c1DF543433AdC4">
+    balanceOf
+  </h3>
 ```
 
 ### How to interact with contract
 Add a CSS element with customized attribution **function-name="<The write function name\>"**
+If the function is payable, use attribution **function-name-value-in-eth="<The value of ethers of this txn/>"**
 
-For example, 
+For example, the following part means calling mint function with quantity 1 and paying 0.000001 eth for this transaction.
 ```
-  <button function-name="airdrop">
-    AirDrop
+  <button function-name="mint" function-name-value-in-eth="0.000001" function-name-args-quantity="1">
+    Mint 1 with fixed price
   </button>
 ```
-After click the button, a dialog will pop up for user to input.
+After click the button, a dialog will pop up. If the arugment has been assigned by attribution, user cannot change it, and input will be disabled.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -208,10 +209,11 @@ After click the button, a dialog will pop up for user to input.
 
 - [x] Baseline connect wallet, read, write ability
 - [x] Add customized field for user to input
+- [ ] Add Additional framework support
 - [ ] Add Additional Templates w/ Examples
 - [ ] Add multi-chain support
 
-See the [open issues](https://github.com/xiaozaa/web3cdn/issues) for a full list of proposed features (and known issues).
+See the [open issues](https://github.com/nftblackmagic/web3cdn/issues) for a full list of proposed features (and known issues).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -249,7 +251,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 Your Name - [@catchonlabs](https://twitter.com/catchonlabs) - info@catchonlabs.com
 
-Project Link: [https://github.com/xiaozaa/web3cdn](https://github.com/xiaozaa/web3cdn)
+Project Link: [https://github.com/nftblackmagic/web3cdn](https://github.com/nftblackmagic/web3cdn)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -275,16 +277,16 @@ Use this space to list resources you find helpful and would like to give credit 
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/xiaozaa/web3cdn.svg?style=for-the-badge
-[contributors-url]: https://github.com/xiaozaa/web3cdn/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/xiaozaa/web3cdn.svg?style=for-the-badge
-[forks-url]: https://github.com/xiaozaa/web3cdn/network/members
-[stars-shield]: https://img.shields.io/github/stars/xiaozaa/web3cdn.svg?style=for-the-badge
-[stars-url]: https://github.com/xiaozaa/web3cdn/stargazers
-[issues-shield]: https://img.shields.io/github/issues/xiaozaa/web3cdn.svg?style=for-the-badge
-[issues-url]: https://github.com/xiaozaa/web3cdn/issues
-[license-shield]: https://img.shields.io/github/license/xiaozaa/web3cdn.svg?style=for-the-badge
-[license-url]: https://github.com/xiaozaa/web3cdn/blob/master/LICENSE.txt
+[contributors-shield]: https://img.shields.io/github/contributors/nftblackmagic/web3cdn.svg?style=for-the-badge
+[contributors-url]: https://github.com/nftblackmagic/web3cdn/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/nftblackmagic/web3cdn.svg?style=for-the-badge
+[forks-url]: https://github.com/nftblackmagic/web3cdn/network/members
+[stars-shield]: https://img.shields.io/github/stars/nftblackmagic/web3cdn.svg?style=for-the-badge
+[stars-url]: https://github.com/nftblackmagic/web3cdn/stargazers
+[issues-shield]: https://img.shields.io/github/issues/nftblackmagic/web3cdn.svg?style=for-the-badge
+[issues-url]: https://github.com/nftblackmagic/web3cdn/issues
+[license-shield]: https://img.shields.io/github/license/nftblackmagic/web3cdn.svg?style=for-the-badge
+[license-url]: https://github.com/nftblackmagic/web3cdn/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/othneildrew
 [product-screenshot]: images/screenshot.png
@@ -304,3 +306,4 @@ Use this space to list resources you find helpful and would like to give credit 
 [Bootstrap-url]: https://getbootstrap.com
 [JQuery.com]: https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white
 [JQuery-url]: https://jquery.com 
+[Webflow-url]: https://web3-integration-website.webflow.io/
