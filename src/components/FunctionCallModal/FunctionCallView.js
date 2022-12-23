@@ -18,6 +18,7 @@ import { titleClass } from "../muiStyle";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import { useSnackbar } from "notistack";
 import { CircularProgress } from "@mui/material";
+import * as _ from "lodash";
 import { etherscanLink } from "../../utils";
 
 export const FunctionCallModal = () => {
@@ -52,7 +53,7 @@ export const FunctionCallModal = () => {
     });
     const { data, error, isError, write } = useContractWrite(config);
 
-    const { isLoading, isSuccess } = useWaitForTransaction({
+    const { data: txnHashRes, isLoading, isSuccess } = useWaitForTransaction({
         hash: data?.hash,
     })
 
@@ -218,8 +219,8 @@ export const FunctionCallModal = () => {
                     </div>
                     {isSuccess && (
                         <div className="etherscan-wrapper">
-                            {"Transcation successfull."}
-                            {/* <a href={etherscanLink() + data?.hash} target="_blank" rel="noreferrer">Etherscan</a> */}
+                            {"Transcation success! View on "}
+                            <a href={`${_.get(chain, ["blockExplorers", "default", "url"])}/tx/${data.hash}`} target="_blank" rel="noreferrer">{_.get(chain, ["blockExplorers", "default", "name"])}</a>
                         </div>
                     )}
 
