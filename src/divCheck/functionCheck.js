@@ -18,7 +18,7 @@ const getDivAttrInfo = (div, symbol) => {
         }
     }
     var price = div.getAttribute(`${symbol}-value-in-eth`);
-    console.log("args name ", name, args, typeof args);
+    console.log("getDivAttrInfo info check", name, args, typeof args);
     if (!(args && Object.keys(args).length)) {
         args = {};
     }
@@ -51,7 +51,7 @@ const getFunctionArgsFromAttr = (div, symbol) => {
     }
 }
 
-const getDivInfoFromLoader = async (info) => {
+const getDivInfoFromLoader = async (div, info) => {
     const abi = await fetchAbiOfContractAt(window.LOGIC_ADDRESS, window.CHAINID);
     const event = abi.find(e => {
         return e.type === 'function' && e.name === info.name
@@ -62,6 +62,19 @@ const getDivInfoFromLoader = async (info) => {
         info.outputs = event.outputs.type;
         info.event = event;
         info.inputs = event.inputs;
+        var args = info.args;
+        for (let i = 0; i < event.inputs.length; i++) {
+            const name = event.inputs[i].name.trim();
+            const value = div.getAttribute(`${functionSymbol}-args-${name}`);
+            if (value) {
+                args = {
+                    ...args,
+                    [name]: value
+                }
+            }
+        }
+        info.args = args;
+        console.log("getDivInfoFromLoader info check", info);
     }
     else {
         alert(`Function not found in ABI ${info.name}`);
@@ -113,7 +126,7 @@ export const checkDivs = async () => {
             functionDiv.href = "#"
             // get information from div attribute
             const infoFromAttr = getDivAttrInfo(functionDiv, functionSymbol);
-            const divInfo = await getDivInfoFromLoader(infoFromAttr);
+            const divInfo = await getDivInfoFromLoader(functionDiv, infoFromAttr);
             if (divInfo.type === "view") {
                 store.dispatch(appendReadFunction(divInfo));
             }
