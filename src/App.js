@@ -1,5 +1,4 @@
 import { store } from "./app/store";
-
 import '@rainbow-me/rainbowkit/styles.css';
 import {
   getDefaultWallets,
