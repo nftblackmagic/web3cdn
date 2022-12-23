@@ -30,7 +30,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/nftblackmagic/web3cdn">
+  <a href="https://www.catchonlabs.xyz/">
     <img src="images/logo.png" alt="Logo" width="auto" height="80">
   </a>
 
