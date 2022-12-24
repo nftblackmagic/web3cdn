@@ -149,6 +149,7 @@ export const FunctionCallModal = () => {
                     argsTmp[input.name] = functionCallInfo.inputArgs[input.name];
                 }
             }
+            console.log("xxxxxxxargsTmp", argsTmp);
             setArgs(argsTmp);
         }
     }, [functionCallInfo.inputs, functionCallInfo.inputArgs, openFunctionCallModal])
