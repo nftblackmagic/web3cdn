@@ -10,7 +10,7 @@ import {
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import { closeFunctionCallModal } from "./FunctionCallSlice";
+import { closeFunctionCallModal, openFunctionCallModal } from "./FunctionCallSlice";
 
 import "./FunctionCallView.css";
 import { isMobile } from "web3modal";
@@ -142,7 +142,7 @@ export const FunctionCallModal = () => {
     }, [error, isError, enqueueSnackbar])
 
     useEffect(() => {
-        if (functionCallInfo.inputs && functionCallInfo.inputArgs) {
+        if (functionCallInfo.inputs && functionCallInfo.inputArgs && openFunctionCallModal) {
             var argsTmp = {};
             for (var input of functionCallInfo.inputs) {
                 if (input.name in functionCallInfo.inputArgs) {
@@ -151,7 +151,7 @@ export const FunctionCallModal = () => {
             }
             setArgs(argsTmp);
         }
-    }, [functionCallInfo.inputs, functionCallInfo.inputArgs])
+    }, [functionCallInfo.inputs, functionCallInfo.inputArgs, openFunctionCallModal])
 
     return (
         <>
