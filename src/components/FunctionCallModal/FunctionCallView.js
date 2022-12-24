@@ -130,10 +130,10 @@ export const FunctionCallModal = () => {
     }, [args, functionCallInfo.inputs])
 
     useEffect(() => {
-        if (functionCallInfo.price) {
+        if (functionCallInfo.price && functionCallModalOpen) {
             setPrice(functionCallInfo.price);
         }
-    }, [functionCallInfo.price])
+    }, [functionCallInfo.price, functionCallModalOpen])
 
     useEffect(() => {
         if (isError) {
@@ -149,7 +149,6 @@ export const FunctionCallModal = () => {
                     argsTmp[input.name] = functionCallInfo.inputArgs[input.name];
                 }
             }
-            console.log("xxxxxxxargsTmp", argsTmp);
             setArgs(argsTmp);
         }
     }, [functionCallInfo.inputs, functionCallInfo.inputArgs, functionCallModalOpen])
