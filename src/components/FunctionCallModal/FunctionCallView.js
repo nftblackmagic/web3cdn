@@ -142,7 +142,7 @@ export const FunctionCallModal = () => {
     }, [error, isError, enqueueSnackbar])
 
     useEffect(() => {
-        if (functionCallInfo.inputs && functionCallInfo.inputArgs && openFunctionCallModal) {
+        if (functionCallInfo.inputs && functionCallInfo.inputArgs && functionCallModalOpen) {
             var argsTmp = {};
             for (var input of functionCallInfo.inputs) {
                 if (input.name in functionCallInfo.inputArgs) {
@@ -152,7 +152,7 @@ export const FunctionCallModal = () => {
             console.log("xxxxxxxargsTmp", argsTmp);
             setArgs(argsTmp);
         }
-    }, [functionCallInfo.inputs, functionCallInfo.inputArgs, openFunctionCallModal])
+    }, [functionCallInfo.inputs, functionCallInfo.inputArgs, functionCallModalOpen])
 
     return (
         <>
