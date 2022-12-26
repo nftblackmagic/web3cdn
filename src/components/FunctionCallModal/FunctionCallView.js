@@ -10,7 +10,7 @@ import {
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import { closeFunctionCallModal, openFunctionCallModal } from "./FunctionCallSlice";
+import { closeFunctionCallModal } from "./FunctionCallSlice";
 
 import "./FunctionCallView.css";
 import { isMobile } from "web3modal";
@@ -19,7 +19,6 @@ import { AiOutlineCloseCircle } from "react-icons/ai";
 import { useSnackbar } from "notistack";
 import { CircularProgress } from "@mui/material";
 import * as _ from "lodash";
-import { etherscanLink } from "../../utils";
 
 export const FunctionCallModal = () => {
     const dispatch = useDispatch();
@@ -53,7 +52,7 @@ export const FunctionCallModal = () => {
     });
     const { data, error, isError, write } = useContractWrite(config);
 
-    const { data: txnHashRes, isLoading, isSuccess } = useWaitForTransaction({
+    const { isLoading, isSuccess } = useWaitForTransaction({
         hash: data?.hash,
     })
 
