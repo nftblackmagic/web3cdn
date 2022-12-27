@@ -1,5 +1,5 @@
 import { store } from "../app/store";
-import { ENABLE_MOCK } from "../constants";
+import { ENABLE_MOCK, SELF_WALLET_SYMBOL } from "../constants";
 import { callViewFunction } from "../contract_access_object/cao";
 import { updateDivText } from "../divCheck/functionCheck";
 import {
@@ -43,7 +43,12 @@ export const connectWalletInit = async (signer) => {
           const args = func.inputs.map((input) => {
             const nameOfInput = input.name;
             if (nameOfInput in func.args) {
-              return func.args[nameOfInput];
+              if (func.args[nameOfInput] === SELF_WALLET_SYMBOL) {
+                return signer.getAddress();
+              }
+              else {
+                return func.args[nameOfInput];
+              }
             }
             else {
               throw new Error(`Input ${nameOfInput} not found in args`);

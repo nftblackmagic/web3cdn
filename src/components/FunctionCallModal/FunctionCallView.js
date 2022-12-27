@@ -19,11 +19,13 @@ import { AiOutlineCloseCircle } from "react-icons/ai";
 import { useSnackbar } from "notistack";
 import { CircularProgress } from "@mui/material";
 import * as _ from "lodash";
+import { SELF_WALLET_SYMBOL } from "../../constants";
 
 export const FunctionCallModal = () => {
     const dispatch = useDispatch();
     const functionCallModalOpen = useSelector(state => state.functionCallModal.functionCallModalOpen);
     const functionCallInfo = useSelector(state => state.functionCallModal.functionCallInfo);
+    const walletAddress = useSelector(state => state.userModal.walletAddress);
     const chain = useSelector(state => state.userModal.chainId);
     const [args, setArgs] = React.useState({});
     const [argsValues, setArgsValues] = React.useState([]);
@@ -111,16 +113,21 @@ export const FunctionCallModal = () => {
         if (functionCallInfo.inputs) {
             for (var input of functionCallInfo.inputs) {
                 if (args[input.name]) {
-                    if (input.type.includes("[]")) {
-                        try {
-                            argsValuesTmp.push(JSON.parse(args[input.name]));
-                        }
-                        catch {
-                            argsValuesTmp.push(args[input.name]);
-                        }
+                    if (args[input.name] === SELF_WALLET_SYMBOL) {
+                        argsValuesTmp.push(walletAddress);
                     }
                     else {
-                        argsValuesTmp.push(args[input.name]);
+                        if (input.type.includes("[]")) {
+                            try {
+                                argsValuesTmp.push(JSON.parse(args[input.name]));
+                            }
+                            catch {
+                                argsValuesTmp.push(args[input.name]);
+                            }
+                        }
+                        else {
+                            argsValuesTmp.push(args[input.name]);
+                        }
                     }
                 }
             }
