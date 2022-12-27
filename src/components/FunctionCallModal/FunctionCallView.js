@@ -113,22 +113,18 @@ export const FunctionCallModal = () => {
         if (functionCallInfo.inputs) {
             for (var input of functionCallInfo.inputs) {
                 if (args[input.name]) {
-                    if (args[input.name] === SELF_WALLET_SYMBOL) {
-                        argsValuesTmp.push(walletAddress);
-                    }
-                    else {
-                        if (input.type.includes("[]")) {
-                            try {
-                                argsValuesTmp.push(JSON.parse(args[input.name]));
-                            }
-                            catch {
-                                argsValuesTmp.push(args[input.name]);
-                            }
+                    if (input.type.includes("[]")) {
+                        try {
+                            argsValuesTmp.push(JSON.parse(args[input.name]));
                         }
-                        else {
+                        catch {
                             argsValuesTmp.push(args[input.name]);
                         }
                     }
+                    else {
+                        argsValuesTmp.push(args[input.name]);
+                    }
+
                 }
             }
         }
@@ -152,6 +148,10 @@ export const FunctionCallModal = () => {
             var argsTmp = {};
             for (var input of functionCallInfo.inputs) {
                 if (input.name in functionCallInfo.inputArgs) {
+                    if (functionCallInfo.inputArgs[input.name] === SELF_WALLET_SYMBOL) {
+                        argsTmp[input.name] = walletAddress;
+                        continue;
+                    }
                     argsTmp[input.name] = functionCallInfo.inputArgs[input.name];
                 }
             }
