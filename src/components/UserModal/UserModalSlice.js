@@ -6,6 +6,7 @@ import { formatWalletAddress } from "../../utils";
 const initialState = {
     userModalOpen: false,
     walletAddress: "",
+    isInitializedContract: false,
     chainId: {},
     provider: {},
     signer: {},
@@ -50,6 +51,9 @@ const userModalReducer = createSlice({
         appendReadFunction: (state, action) => {
             state.readFunction.push(action.payload)
         },
+        updateIsInitializedContract: (state, action) => {
+            state.isInitializedContract = action.payload
+        },
     },
 });
 
@@ -63,6 +67,7 @@ export const {
     updateOrderSignData,
     updateReadFunction,
     appendReadFunction,
+    updateIsInitializedContract,
 } = userModalReducer.actions;
 
 export default userModalReducer.reducer;

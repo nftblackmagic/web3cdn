@@ -10,7 +10,7 @@ export const GAS_INCREASE = 116;
 
 export const callViewFunction = async (contractAddr, methodName, args) => {
   const contractObj = fetchContractObjAt(contractAddr);
-  console.log("callViewFunction", contractObj, methodName);
+  console.log("callViewFunction", methodName);
   return getFunctionSignature(contractObj, methodName, args);
 };
 

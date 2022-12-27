@@ -1,6 +1,6 @@
 import { useAccountModal, useChainModal, useConnectModal } from "@rainbow-me/rainbowkit";
 import { useDispatch, useSelector } from "react-redux";
-import { closeUserModal, updateChainId, updateProvider, updateSigner, updateWalletAddress } from "./UserModalSlice";
+import { closeUserModal, updateChainId, updateIsInitializedContract, updateProvider, updateSigner, updateWalletAddress } from "./UserModalSlice";
 import { createTheme } from "@mui/material/styles";
 import { ThemeProvider } from "@mui/material";
 
@@ -14,7 +14,7 @@ import "./UserModal.css";
 import "../mint.css";
 import { useAccount, useEnsName, useNetwork, useSwitchNetwork, useProvider, useSigner } from "wagmi";
 import { formatWalletAddress } from "../../utils";
-import { connectWalletInit, getChainIdFromWindow } from "../../wallet/wallet";
+import { connectWalletInit, getChainIdFromWindow, readViewCall } from "../../wallet/wallet";
 import { useSnackbar } from "notistack";
 import { ethers } from "ethers";
 
@@ -42,7 +42,8 @@ const theme = createTheme({
 export const UserModal = () => {
     const dispatch = useDispatch();
     const userModalOpen = useSelector(state => state.userModal.userModalOpen);
-
+    const readFunction = useSelector(state => state.userModal.readFunction);
+    const isInitializedContract = useSelector(state => state.userModal.isInitializedContract);
     const { openConnectModal } = useConnectModal();
     const { openAccountModal } = useAccountModal();
     const { openChainModal } = useChainModal();
@@ -89,8 +90,15 @@ export const UserModal = () => {
             dispatch(updateProvider(null));
             dispatch(updateSigner(null));
             dispatch(updateChainId(null))
+            dispatch(updateIsInitializedContract(false));
         }
     }, [address, provider, signer, chain]);
+
+    useEffect(() => {
+        if (signer && (readFunction.length > 0) && isInitializedContract) {
+            readViewCall(signer, readFunction);
+        }
+    }, [signer, readFunction, isInitializedContract]);
 
     return (
         <>

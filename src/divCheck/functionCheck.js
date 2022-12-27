@@ -59,7 +59,17 @@ const getDivInfoFromLoader = async (div, info) => {
     if (event) {
         info.contractAddress = window.CONTRACT_ADDRESS;
         info.type = event.stateMutability;
-        info.outputs = event.outputs.type;
+        const returnValue = div.getAttribute(`${functionSymbol}-return`);
+        if (returnValue) {
+            const outputsTmp = event.outputs.filter((output) => {
+                return output.name === returnValue.trim();
+            });
+            info.outputs = outputsTmp;
+        }
+        const outputType = div.getAttribute(`${functionSymbol}-output-type`);
+        if (outputType) {
+            info.outputType = outputType;
+        }
         info.event = event;
         info.inputs = event.inputs;
         var args = info.args;
