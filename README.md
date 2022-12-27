@@ -191,6 +191,22 @@ For example, read token balance of address 0x5a3B85334612a18cCE4Eef4567c1DF54343
   </h3>
 ```
 
+**function-name-args-<The arg name\>="--self-wallet"** means the filed will use user's wallet address as input.
+For example,
+```
+  <h3 function-name="balanceOf" function-name-args-owner="--self-wallet">
+    balanceOf
+  </h3>
+```
+**function-name-return>="<One of the function outputs/>"** means only part of the return information will show after reading contract.
+**function-name-output-type="<type/>"** means the output format of the return value.
+For example, the saleConfig's output has two fileds, one of them is **publicSaleStartTime**. The text will only show the **publicSaleStartTime** in css element. The output type is **time**, means the **publicSaleStartTime** will show the local time in a time format.
+```
+  <h3 function-name="saleConfig" function-name-return="publicSaleStartTime" function-name-output-type="time">
+    saleConfig
+  </h3>
+```
+
 ### How to interact with contract
 Add a CSS element with customized attribution **function-name="<The write function name\>"**
 If the function is payable, use attribution **function-name-value-in-eth="<The value of ethers of this txn/>"**
