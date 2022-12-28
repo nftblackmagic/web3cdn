@@ -39,7 +39,7 @@
   <p align="center">
     An awesome no code solution for web3 development!
     <br />
-    <a href="https://github.com/nftblackmagic/web3cdn"><strong>Explore the docs »</strong></a>
+    <a href="https://catchonlabs.gitbook.io/catchon-labs/catchon-cdn"><strong>Explore the docs »</strong></a>
     <br />
     <br />
     <a href="https://github.com/nftblackmagic/web3cdn">View Demo</a>
