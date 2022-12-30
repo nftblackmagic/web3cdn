@@ -84,7 +84,7 @@ export const readViewCall = async (signer, readFunction) => {
         }
         if (func.outputs && (func.outputs.length > 0)) {
           result = "";
-          func.outputs.map((output) => {
+          func.outputs.forEach((output) => {
             if (output.name in res) {
               result += res[output.name];
             }

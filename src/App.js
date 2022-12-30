@@ -10,6 +10,7 @@ import { infuraProvider } from 'wagmi/providers/infura';
 import { publicProvider } from 'wagmi/providers/public';
 import { UserModal } from './components/UserModal/UserModal';
 import { FunctionCallModal } from "./components/FunctionCallModal/FunctionCallView";
+import { SignInModal } from "./components/SignInModal/SignInModal";
 const { chains, provider } = configureChains(
   [mainnet, polygon, optimism, arbitrum, goerli],
   [
@@ -36,6 +37,7 @@ function App() {
         <RainbowKitProvider chains={chains}>
           <UserModal />
           <FunctionCallModal />
+          <SignInModal />
         </RainbowKitProvider>
       </WagmiConfig>
     </>

@@ -13,8 +13,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { closeFunctionCallModal } from "./FunctionCallSlice";
 
 import "./FunctionCallView.css";
-import { isMobile } from "web3modal";
-import { titleClass } from "../muiStyle";
+import { cardClasses, titleClass } from "../muiStyle";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import { useSnackbar } from "notistack";
 import { CircularProgress } from "@mui/material";
@@ -33,7 +32,6 @@ export const FunctionCallModal = () => {
     const { enqueueSnackbar } = useSnackbar();
 
     const isPayable = functionCallInfo.type === "payable";
-    const cardClasses = isMobile() ? { minWidth: 275 } : { minWidth: 475 };
 
     const {
         config,
