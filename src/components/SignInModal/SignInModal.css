@@ -1,0 +1,10 @@
+.blur {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.61);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+}

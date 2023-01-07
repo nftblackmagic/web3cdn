@@ -1,5 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import "../FunctionCallModal/FunctionCallView.css";
+import "./SignInModal.css";
 
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
@@ -11,6 +13,8 @@ import { cardClasses, titleClass } from "../muiStyle";
 import { updateOrderSignData } from "../UserModal/UserModalSlice";
 import { useSnackbar } from "notistack";
 import { callViewFunction } from "../../contract_access_object/cao";
+import { formatWalletAddress } from "../../utils";
+
 
 export const SignInModal = () => {
     const dispatch = useDispatch();
@@ -20,6 +24,9 @@ export const SignInModal = () => {
     const isInitializedContract = useSelector(state => state.userModal.isInitializedContract);
     const { enqueueSnackbar } = useSnackbar();
     const [ownerOf, setOwnerOf] = React.useState("");
+    const [step, setStep] = React.useState(0);
+    const [closeBlur, setCloseBlur] = React.useState(false);
+    const buyPassLink = window.BUY_PASS_LINK ? window.BUY_PASS_LINK : "/";
 
     const { data, isError, isLoading, isSuccess, signMessage } = useSignMessage({
         message: 'Login to see the page details',
@@ -36,7 +43,7 @@ export const SignInModal = () => {
 
     const handleSignMessage = () => {
         if (!ownerOf) {
-            enqueueSnackbar("You don't have the token", { variant: 'error' })
+            setStep(1);
         }
         else {
             if (!orderSignData) {
@@ -55,6 +62,7 @@ export const SignInModal = () => {
 
     useEffect(() => {
         if (window.SIGN_PAGE_PATH) {
+            setCloseBlur(false);
             const href = window.location.href;
             const pathName = window.location.pathname;
             console.log("checkPath", href, pathName);
@@ -75,6 +83,7 @@ export const SignInModal = () => {
         if (isSuccess) {
             dispatch(updateOrderSignData(data));
             handleClose();
+            setCloseBlur(true);
         }
         if (isError) {
             enqueueSnackbar('Sign Message Error', { variant: 'error' })
@@ -93,20 +102,32 @@ export const SignInModal = () => {
                 <DialogTitle style={titleClass}>
                     <div className="common-title">
                         <h1>
-                            Sign In
+                            {formatWalletAddress(walletAddress)}
                         </h1>
                     </div>
                 </DialogTitle>
                 <DialogContent sx={cardClasses}>
-                    <div className="function-call-wrapper">
-                        <div className="function-call-input">
-                            <button className="function-call-button" onClick={handleSignMessage} disabled={isLoading}>
-                                Sign In
-                            </button>
+                    {step === 0 &&
+                        <div className="function-call-wrapper">
+                            <div className="function-call-input">
+                                <button className="function-call-button" onClick={handleSignMessage} disabled={isLoading}>
+                                    Sign message to access the page
+                                </button>
+                            </div>
                         </div>
-                    </div>
+                    }
+                    {step === 1 &&
+                        <div className="function-call-wrapper">
+                            <div className="function-call-input">
+                                You don't have any pass to access this page.
+                                <a href={buyPassLink} target="_blank" rel="noreferrer" >Buy pass to access</a>
+                            </div>
+                        </div>
+
+                    }
                 </DialogContent>
             </Dialog>
+            {!closeBlur && signInModal && <div className="blur"></div>}
         </>
     )
 }
