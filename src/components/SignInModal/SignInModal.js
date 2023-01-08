@@ -43,7 +43,7 @@ export const SignInModal = () => {
 
     const handleSignMessage = () => {
         if (!ownerOf) {
-            setStep(1);
+            setStep(2);
         }
         else {
             if (!orderSignData) {
@@ -69,6 +69,9 @@ export const SignInModal = () => {
             if (pathName === window.SIGN_PAGE_PATH) {
                 console.log("SIGN PAGE");
                 dispatch(openSignInModal());
+                if (walletAddress) {
+                    setStep(1);
+                }
             }
         }
     }, [walletAddress, window.location.pathname])
@@ -102,12 +105,21 @@ export const SignInModal = () => {
                 <DialogTitle style={titleClass}>
                     <div className="common-title">
                         <h1>
-                            {formatWalletAddress(walletAddress)}
+                            {walletAddress ? formatWalletAddress(walletAddress) : "Connect wallet"}
                         </h1>
                     </div>
                 </DialogTitle>
                 <DialogContent sx={cardClasses}>
                     {step === 0 &&
+                        <div className="function-call-wrapper">
+                            <div className="function-call-input">
+                                <button className="function-call-button" onClick={() => { dispatch(openUserModal()) }}>
+                                    Connect wallet
+                                </button>
+                            </div>
+                        </div>
+                    }
+                    {step === 1 &&
                         <div className="function-call-wrapper">
                             <div className="function-call-input">
                                 <button className="function-call-button" onClick={handleSignMessage} disabled={isLoading}>
@@ -116,7 +128,7 @@ export const SignInModal = () => {
                             </div>
                         </div>
                     }
-                    {step === 1 &&
+                    {step === 2 &&
                         <div className="function-call-wrapper">
                             <div className="function-call-input">
                                 You don't have any pass to access this page.
