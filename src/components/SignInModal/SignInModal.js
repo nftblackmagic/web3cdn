@@ -28,7 +28,6 @@ export const SignInModal = () => {
     const [step, setStep] = React.useState(0);
     const [closeBlur, setCloseBlur] = React.useState(false);
     const buyPassLink = window.BUY_PASS_LINK ? window.BUY_PASS_LINK : "/";
-    const { address, isConnected } = useAccount();
 
     const { data, isError, isLoading, isSuccess, signMessage } = useSignMessage({
         message: 'Login to see the page details',

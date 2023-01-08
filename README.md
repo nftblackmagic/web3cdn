@@ -155,6 +155,28 @@ CHAINID=5
 <link href="https://catchoncdn.vercel.app/main.css" rel="stylesheet">
 ```
 
+If you want to have some membership page, you can use SIGN_PAGE_PATH. 
+For example, you have a page "/blog", it shuold be a membership only page. Only NFT holder have access to view it. You can add following section.
+It required the wallet has NFT of 0xCA127e07Ce57c78eF0C739F268A437e76c66e0F1 to view the page. Help people create their own valuable informations.
+
+```
+<script> CONTRACT_ADDRESS="0xCA127e07Ce57c78eF0C739F268A437e76c66e0F1"
+LOGIC_ADDRESS="0xCA127e07Ce57c78eF0C739F268A437e76c66e0F1"
+CHAINID=5
+SIGN_PAGE_PATH = "/blog"
+...
+```
+
+If you add BUY_PASS_LINK, it will redirect user to buy page when they don't have access to membership only page. For example,
+```
+<script> CONTRACT_ADDRESS="0xCA127e07Ce57c78eF0C739F268A437e76c66e0F1"
+LOGIC_ADDRESS="0xCA127e07Ce57c78eF0C739F268A437e76c66e0F1"
+CHAINID=5
+SIGN_PAGE_PATH = "/blog"
+BUY_PASS_LINK = "/mint"
+```
+The page "/mint" is for buying membership pass.
+
 After inserting the script into html, the configuration is done. 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
