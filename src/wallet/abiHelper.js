@@ -13,8 +13,8 @@ export const fetchAbiOfContractAt = async (contractAddr, chainId) => {
     console.log("ABI CACHE", contractAddr);
     return abi[contractAddr];
   }
-  else if (window.ABI && (contractAddr in window.ABI)) {
-    return window.ABI[contractAddr];
+  else if (window.ABI) {
+    return window.ABI;
   }
   else {
     return await fetch(API_DB + "abi/" + chainId + "/" + contractAddr, {
