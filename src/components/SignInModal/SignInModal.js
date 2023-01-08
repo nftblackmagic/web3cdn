@@ -10,7 +10,7 @@ import { useSignMessage } from 'wagmi'
 
 import { closeSignInModal, openSignInModal } from "./SignInModalSlice";
 import { cardClasses, titleClass } from "../muiStyle";
-import { updateOrderSignData } from "../UserModal/UserModalSlice";
+import { openUserModal, updateOrderSignData } from "../UserModal/UserModalSlice";
 import { useSnackbar } from "notistack";
 import { callViewFunction } from "../../contract_access_object/cao";
 import { formatWalletAddress } from "../../utils";
