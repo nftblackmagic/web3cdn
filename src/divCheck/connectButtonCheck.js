@@ -1,5 +1,5 @@
 import { store } from "../app/store";
-import { openUserModal } from "../components/UserModal/UserModalSlice";
+import { closeUserModal, openUserModal } from "../components/UserModal/UserModalSlice";
 import { setButtonText } from "../utils";
 
 const connectSymbol = "connect-button"
@@ -19,7 +19,12 @@ export const updateConnectButton = async () => {
                 console.log("CLICK the button")
                 const initialBtnText = connectButton.textContent;
                 setButtonText(connectButton, "Loading...")
-                store.dispatch(openUserModal());
+                if (store.getState().userModal.userModalOpen) {
+                    store.dispatch(closeUserModal());
+                }
+                else {
+                    store.dispatch(openUserModal());
+                }
                 setButtonText(connectButton, initialBtnText)
             }
         })
