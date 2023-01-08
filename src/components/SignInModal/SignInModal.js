@@ -71,7 +71,7 @@ export const SignInModal = () => {
                 dispatch(openSignInModal());
             }
         }
-    }, [walletAddress])
+    }, [walletAddress, window.location.pathname])
 
     useEffect(() => {
         if (!(parseInt(ownerOf) > 0) && isInitializedContract) {
