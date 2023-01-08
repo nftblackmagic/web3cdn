@@ -6,14 +6,15 @@ import "./SignInModal.css";
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import { useSignMessage } from 'wagmi'
+import { useAccount, useSignMessage } from 'wagmi'
 
 import { closeSignInModal, openSignInModal } from "./SignInModalSlice";
 import { cardClasses, titleClass } from "../muiStyle";
-import { openUserModal, updateOrderSignData } from "../UserModal/UserModalSlice";
+import { updateOrderSignData } from "../UserModal/UserModalSlice";
 import { useSnackbar } from "notistack";
 import { callViewFunction } from "../../contract_access_object/cao";
 import { formatWalletAddress } from "../../utils";
+import { UserSection } from "../UserModal/UserSection";
 
 
 export const SignInModal = () => {
@@ -27,6 +28,7 @@ export const SignInModal = () => {
     const [step, setStep] = React.useState(0);
     const [closeBlur, setCloseBlur] = React.useState(false);
     const buyPassLink = window.BUY_PASS_LINK ? window.BUY_PASS_LINK : "/";
+    const { address, isConnected } = useAccount();
 
     const { data, isError, isLoading, isSuccess, signMessage } = useSignMessage({
         message: 'Login to see the page details',
@@ -113,9 +115,7 @@ export const SignInModal = () => {
                     {step === 0 &&
                         <div className="function-call-wrapper">
                             <div className="function-call-input">
-                                <button className="function-call-button" onClick={() => { dispatch(openUserModal()) }}>
-                                    Connect wallet
-                                </button>
+                                <UserSection />
                             </div>
                         </div>
                     }
