@@ -16,9 +16,11 @@ import "./FunctionCallView.css";
 import { cardClasses, titleClass } from "../muiStyle";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import { useSnackbar } from "notistack";
-import { CircularProgress } from "@mui/material";
+import { CircularProgress, IconButton, Tooltip } from "@mui/material";
+import { AiOutlineQuestionCircle } from "react-icons/ai";
 import * as _ from "lodash";
 import { SELF_WALLET_SYMBOL } from "../../constants";
+import { formatWalletAddress } from "../../utils";
 
 export const FunctionCallModal = () => {
     const dispatch = useDispatch();
@@ -178,6 +180,17 @@ export const FunctionCallModal = () => {
                 <DialogContent sx={cardClasses}>
                     <div className="function-call-wrapper">
                         <div className="function-call-input">
+                            <div className="text-row">
+                                <a href={`${_.get(chain, ["blockExplorers", "default", "url"])}/address/${functionCallInfo.contractAddress}`} target="_blank" rel="noreferrer">
+                                    {`${formatWalletAddress(functionCallInfo.contractAddress)}:`}
+                                </a>
+                                {functionCallInfo.name}
+                                <Tooltip title="We cannot verify this contract. Make sure you trust this address." placement="right">
+                                    <button>
+                                        <AiOutlineQuestionCircle />
+                                    </button>
+                                </Tooltip>
+                            </div>
                             {
                                 functionCallInfo.inputs && functionCallInfo.inputs.map((input, index) => {
                                     return (
@@ -187,7 +200,7 @@ export const FunctionCallModal = () => {
                                                 id={input.name}
                                                 disabled={handleInputDisabled(input)}
                                                 onChange={(e) => handleSetArgs(input.name, e.target.value)}
-                                                // placeholder="420"
+                                                placeholder={input.type}
                                                 value={args[input.name] || ""}
                                             />
                                         </div>

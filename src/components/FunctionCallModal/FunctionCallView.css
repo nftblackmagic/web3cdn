@@ -132,3 +132,37 @@
     padding: 0;
     margin: 0 24px;
 }
+
+.text-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    gap: 5px;
+    font-size: 18px;
+}
+
+.text-row a {
+    font-size: 14px;
+    border: none;
+    text-decoration: underline;
+    padding: 0;
+}
+
+.text-row button {
+    font-size: 14px;
+    border: none;
+    background-color: transparent;
+    text-decoration: underline;
+    cursor: pointer;
+    color: #333;
+    width: auto;
+    height: auto;
+    padding: 0;
+}
+
+.text-row button:hover {
+    color: grey;
+    background-color: transparent;
+}
